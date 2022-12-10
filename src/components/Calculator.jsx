@@ -3,20 +3,20 @@ import "./Calculator.css";
 
 export default function () {
     const [newVal, setNewVal] = useState("");
+    const [result, setResult] = useState("");
     const insertValue = (e) => {
         setNewVal(newVal.concat(e.target.value));
     };
-    // const result = (res) => {
-    //     switch (res){
-    //         case "+":
-
-    //     }
-          
-    // }
+    const evaluate = () => {
+        return setNewVal(new Function('return ' + newVal)());
+    }
+    const clearAll = () => {
+        setNewVal("");
+    }
     return (
         <div className="encompassor">
             <div className="calc-scheme">
-                <input className='grid-1' onChange={insertValue} value={newVal}></input>
+                <input className='grid-1' onChange={insertValue} value={newVal} readOnly="readonly"></input>
                 <button className="calc-buttons" onClick={insertValue} value="1">1</button>
                 <button className="calc-buttons" onClick={insertValue} value="2">2</button>
                 <button className="calc-buttons" onClick={insertValue} value="3">3</button>
@@ -31,7 +31,9 @@ export default function () {
                 <button className="calc-buttons" onClick={insertValue} value="+">+</button>
                 <button className="calc-buttons" onClick={insertValue} value="-">-</button>
                 <button className="calc-buttons" onClick={insertValue} value="*">*</button>
-                <button className="calc-buttons" onClick={insertValue} value="/">/</button>            
+                <button className="calc-buttons" onClick={insertValue} value="/">/</button>
+                <button className="calc-buttons" onClick={clearAll}>AC</button>
+                <button className="calc-buttons" onClick={evaluate}>=</button>       
                 </div>
         </div>
     )
