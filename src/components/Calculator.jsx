@@ -7,10 +7,12 @@ export default function () {
   const insertValue = (e) => {
     setNewVal(newVal.concat(e.target.value));
   };
+
   // This function implicitly generates a evaluation of the input that was given to it
   // The reason is that "eval()" is not recommened
+
   const evaluate = () => {
-    return setNewVal(new Function("return " + newVal)());
+    return setNewVal(new Function("return " + newVal)( console.log(newVal) ).toString());
   };
   const clearAll = () => {
     setNewVal("");
